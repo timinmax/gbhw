@@ -26,6 +26,10 @@ public class hw01 {
         checkSign(9);
         checkSign(0);
         checkSign(-8);
+
+        //task 6
+        System.out.println("isNegative(6) = " + isNegative(6));
+        System.out.println("isNegative(-6) = " + isNegative(-6));
     }
 
     public static float calcFormula(float a, float b, float c, float d){
@@ -39,5 +43,9 @@ public class hw01 {
 
     public static void checkSign(int number2Check){
         System.out.println("The number " + number2Check + " is " + ((number2Check>=0)?"positive.":"negative"));
+    }
+
+    public static boolean isNegative(int number2Check){
+        return number2Check<0;
     }
 }
