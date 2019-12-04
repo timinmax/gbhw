@@ -14,9 +14,18 @@ public class hw01 {
 
         floatVar = calcFormula(a, b, c, d);
         System.out.println("" + a + " * (" + b + " + (" + c + " / " + d + ")) = " + floatVar);
+
+        int firstNum, secondNum;
+        firstNum = secondNum = 17;
+        System.out.println("Test result is " + testNumbers(firstNum, secondNum));
     }
 
     public static float calcFormula(float a, float b, float c, float d){
         return a * (b + (c / d));
+    }
+
+    public static boolean testNumbers(int firstNumber, int secondNumber){
+        int sumOfNum = firstNumber + secondNumber;
+        return sumOfNum>=10 && sumOfNum<=20;
     }
 }
