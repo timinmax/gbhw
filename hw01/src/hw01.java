@@ -30,6 +30,15 @@ public class hw01 {
         //task 6
         System.out.println("isNegative(6) = " + isNegative(6));
         System.out.println("isNegative(-6) = " + isNegative(-6));
+
+        //Task 7
+        sayHello("Max");
+
+        //task 8
+        for (int i = 0; i<=2300; i++){
+            if (isLeapYear(i))
+                System.out.println("The " + i + " year is leap");
+        }
     }
 
     public static float calcFormula(float a, float b, float c, float d){
@@ -47,5 +56,18 @@ public class hw01 {
 
     public static boolean isNegative(int number2Check){
         return number2Check<0;
+    }
+
+    public static void sayHello(String name){
+        System.out.println("Hello, " + name);
+    }
+
+    public static boolean isLeapYear(int year){
+        boolean is4 = year%4 == 0;
+        boolean is100 = year%100 == 0;
+        boolean is400 = year%400 == 0;
+
+        return (is4&&!is100)||is400;
+
     }
 }
