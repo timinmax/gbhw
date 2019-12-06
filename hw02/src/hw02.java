@@ -6,9 +6,15 @@ public class hw02 {
         int[] invertedArr = inverter(testArr);
         print_r(invertedArr);
 
-        //Домашнее задание 02 задача 01
+        //Домашнее задание 02 задача 02
         int[] arrayStep3 = getArrayIncrStep(3, 8);
         print_r(arrayStep3);
+
+        //Домашнее задание 02 задача 03
+        int[] anotherTestArr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        print_r(anotherTestArr);
+        processArray(anotherTestArr);
+        print_r(anotherTestArr);
     }
 
 
@@ -26,6 +32,12 @@ public class hw02 {
             returnArr[i] = returnArr[i-1] + step;
         }
         return returnArr;
+    }
+
+    private static void processArray(int[] array2Process){
+        for (int i = 0; i<array2Process.length; i++){
+            array2Process[i] = array2Process[i] * ((array2Process[i]<6)?2:1);
+        }
     }
 
     private static void print_r(int[] arrayToPrint){
