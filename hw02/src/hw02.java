@@ -21,6 +21,10 @@ public class hw02 {
         for (int i = 0; i<table.length; i++){
             print_r(table[i]);
         }
+
+        System.out.println("\nДомашнее задание 02 задача 05");
+        print_r(anotherTestArr);
+        System.out.println("\nMax = " + getMax(anotherTestArr) + "; Min = " + getMin(anotherTestArr));
     }
 
 
@@ -52,6 +56,33 @@ public class hw02 {
             returnTable[i][i] = 1;
         }
         return returnTable;
+    }
+    private static int getMax(int[] numbersArray){
+        //если передали пустой массив
+        if (numbersArray.length == 0) return 0;
+        //если в массиве всего 1 элемент, то просто возвращаем его
+        if (numbersArray.length == 1) return numbersArray[0];
+        //в остальных случаях надо перебрать массив
+        int number2return = numbersArray[0];
+
+        for (int i = 1; i<numbersArray.length; i++){
+            number2return = (numbersArray[i]>number2return)?numbersArray[i]:number2return;
+        }
+        return number2return;
+    }
+
+    private static int getMin(int[] numbersArray){
+        //если передали пустой массив
+        if (numbersArray.length == 0) return 0;
+        //если в массиве всего 1 элемент, то просто возвращаем его
+        if (numbersArray.length == 1) return numbersArray[0];
+        //в остальных случаях надо перебрать массив
+        int number2return = numbersArray[0];
+
+        for (int i = 1; i<numbersArray.length; i++){
+            number2return = (numbersArray[i]<number2return)?numbersArray[i]:number2return;
+        }
+        return number2return;
     }
 
     private static void print_r(int[] arrayToPrint){
