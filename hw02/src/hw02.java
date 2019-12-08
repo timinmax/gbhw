@@ -136,11 +136,12 @@ public class hw02 {
     }
 
     public static void shiftArray(int[] array2Shift, int step){
-        if (step > 0) {
+        //zero shift ignored
+        if (step > 0) {//shift right
             for (int i = array2Shift.length; i >= 0; i--) {
                 shiftElement(array2Shift, i, step);
             }
-        }else if (step < 0){
+        }else if (step < 0){//shift left
             for (int i = 0; i < array2Shift.length; i++) {
                 shiftElement(array2Shift, i, step);
             }
@@ -149,7 +150,7 @@ public class hw02 {
 
     public static void shiftElement(int[] array2Shift, int pos, int step){
         int newPos = pos + step;
-        if (newPos >= 0 && newPos < array2Shift.length){
+        if (newPos >= 0 && newPos < array2Shift.length){//new pos is inside boundaries
             array2Shift[newPos] = array2Shift[pos];
             array2Shift[pos] = 0;
         }
