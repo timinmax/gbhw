@@ -25,6 +25,20 @@ public class hw02 {
         System.out.println("\nДомашнее задание 02 задача 05");
         print_r(anotherTestArr);
         System.out.println("\nMax = " + getMax(anotherTestArr) + "; Min = " + getMin(anotherTestArr));
+
+        System.out.println("\nДомашнее задание 02 задача 06");
+        int[] testArray020601 = {2, 2, 2, 1, 2, 2, 10, 1};
+        int[] testArray020602 = {1, 1, 1, 2, 1};
+        int[] testArray020603 = {1, 1, 1, 1, 4};
+
+        print_r(testArray020601);
+        System.out.println("\nBalance = " + checkBalance(testArray020601));
+
+        print_r(testArray020602);
+        System.out.println("\nBalance = " + checkBalance(testArray020602));
+
+        print_r(testArray020603);
+        System.out.println("\nBalance = " + checkBalance(testArray020603));
     }
 
 
@@ -90,5 +104,20 @@ public class hw02 {
         for (int i = 0; i<arrayToPrint.length;i++){
             System.out.print("\t" + arrayToPrint[i]);
         }
+    }
+
+    private static boolean checkBalance(int[] testArray){
+        int iSum = 0;
+        for (int i = 0; i<testArray.length-1;i++){
+            iSum += testArray[i];
+            int jSum = 0;
+            for (int j = i+1; j<testArray.length; j++){
+                jSum += testArray[j];
+            }
+            if (iSum == jSum){
+                return true;
+            }
+        }
+        return false;
     }
 }
