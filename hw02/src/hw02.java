@@ -39,6 +39,20 @@ public class hw02 {
 
         print_r(testArray020603);
         System.out.println("\nBalance = " + checkBalance(testArray020603));
+
+        System.out.println("\nДомашнее задание 02 задача 07");
+        int shiftStep = -1;
+        System.out.println("\nShift step = " + shiftStep);
+        print_r(testArray020601);
+        shiftArray(testArray020601, shiftStep);
+        print_r(testArray020601);
+
+        shiftStep = 1;
+        System.out.println("\nShift step = " + shiftStep);
+        print_r(anotherTestArr);
+        shiftArray(anotherTestArr, shiftStep);
+        print_r(anotherTestArr);
+
     }
 
 
@@ -119,5 +133,26 @@ public class hw02 {
             }
         }
         return false;
+    }
+
+    public static void shiftArray(int[] array2Shift, int step){
+        if (step > 0) {
+            for (int i = array2Shift.length; i >= 0; i--) {
+                shiftElement(array2Shift, i, step);
+            }
+        }else if (step < 0){
+            for (int i = 0; i < array2Shift.length; i++) {
+                shiftElement(array2Shift, i, step);
+            }
+        }
+    }
+
+    public static void shiftElement(int[] array2Shift, int pos, int step){
+        int newPos = pos + step;
+        if (newPos >= 0 && newPos < array2Shift.length){
+            array2Shift[newPos] = array2Shift[pos];
+            array2Shift[pos] = 0;
+        }
+
     }
 }
