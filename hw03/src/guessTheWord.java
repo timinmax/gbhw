@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class guessTheWord {
     }
     public static void playTheGame(){
         String word2Guess = chooseTheWord();
-        System.out.println("Отгадайте слово из списка " + words.toString());
+        System.out.println("Отгадайте слово из списка " + Arrays.toString(words));
         boolean win = false;
         int i = 1;
         String userPrompt = "###############################";
@@ -32,7 +33,7 @@ public class guessTheWord {
             String userInput = sc.next();
             userInput = userInput.toLowerCase();
             if (userInput.equals(word2Guess)){
-                System.out.println("Вы угадали слово!");
+                System.out.printf("Вы угадали слово c %d попытки!", i-1);
                 break;
             };
             StringBuilder promptBuilder = new StringBuilder(userPrompt);
