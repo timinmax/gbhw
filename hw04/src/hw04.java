@@ -2,8 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class hw04 {
-    static final int SIZE_X = 3;
-    static final int SIZE_Y = 3;
+    static final int SIZE_X = 5;
+    static final int SIZE_Y = 5;
 
     static char[][] field = new char[SIZE_X][SIZE_X];
     static Scanner scanner = new Scanner(System.in);
