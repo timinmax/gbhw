@@ -52,14 +52,66 @@ public class hw04 {
         do {
             if (pID==PLAYER_DOT){
                 System.out.println("Введите координаты X и Y:");
+                x = scanner.nextInt() - 1;
+                y = scanner.nextInt() - 1;
+            }else {
+                int[] aiMove = aiBestMove();
+                x = aiMove[0];
+                y = aiMove[1];
             }
-            x = (pID==PLAYER_DOT)?scanner.nextInt() - 1:random.nextInt(SIZE_X);
-            y = (pID==PLAYER_DOT)?scanner.nextInt() - 1:random.nextInt(SIZE_Y);
+
         }
         while (!valid(y, x));
-        field[y][x] = pID;
+
+        setSymbol(y,x,pID);
     }
 
+    static int[] aiBestMove(){
+        //trying to find ai's win-move
+        int[] moveCoord = move2Win(AI_DOT);
+
+        if (moveCoord[0] != -1){
+            return moveCoord;//found final ai move 2 win
+        }
+        //trying to find player's win move to block it
+        moveCoord = move2Win(PLAYER_DOT);
+        if (moveCoord[0] != -1){
+            return moveCoord;
+        }
+        //if there's no win-moves make random move
+        moveCoord[0] = random.nextInt(SIZE_X);
+        moveCoord[1] = random.nextInt(SIZE_Y);
+
+        return moveCoord;
+    }
+
+    static int[] move2Win(char testing_DOT){
+        int[] winCoord = {-1,-1};
+        for (int i = 0; i<SIZE_X; i++) {
+            for (int j = 0; j < SIZE_Y; j++) {
+                if(field[j][i] != EMPTY_DOT){
+                    continue;
+                }
+                setSymbol(j,i,testing_DOT);
+                if (checkWin(testing_DOT)){
+                    winCoord[0] = i;
+                    winCoord[1] = j;
+                }
+                setSymbol(j,i,EMPTY_DOT);
+                if (winCoord[0]!=-1){
+                    break;
+                }
+            }
+            if (winCoord[0]!=-1){
+                break;
+            }
+        }
+        return winCoord;
+    }
+
+    private static void setSymbol(int y, int x, char symbol) {
+        field[y][x] = symbol;
+    }
     static boolean isFieldsFull() {
         for (int i = 0; i < SIZE_Y; i++) {
             for (int j = 0; j < SIZE_X; j++) {
