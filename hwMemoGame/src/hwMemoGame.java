@@ -6,8 +6,6 @@ public class hwMemoGame extends JFrame {
         setTitle("The memo game");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(300,300,300,300);
-
-
         setVisible(true);
     }
 }
