@@ -9,6 +9,7 @@ public class MainWindow  extends JFrame {
     private int level;
     private int cols, rows;
     private JPanel gamePanel = new JPanel();
+    private myBtn[] openedBtns = new myBtn[2];
     public MainWindow() throws HeadlessException {
         setTitle("The memo game");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -39,8 +40,33 @@ public class MainWindow  extends JFrame {
         setJMenuBar(menuBar);
     }
 
-    private void onButtonPress(){
-        System.out.println("button pressed");
+    private void onButtonPress(myBtn btnPressed){
+        if (openedBtns[0]!= null && openedBtns[1]!= null ) {
+            if (openedBtns[0].getHiddenValue() != openedBtns[1].getHiddenValue()){
+                openedBtns[0].setText("x");
+                openedBtns[1].setText("x");
+            }
+            openedBtns = new myBtn[2];
+        }
+        if (openedBtns[0]==null){
+            openedBtns[0] = btnPressed;
+            btnPressed.setText("" + openedBtns[0].getHiddenValue());
+        }else if (openedBtns[1] == null){
+            openedBtns[1] = btnPressed;
+            btnPressed.setText("" + openedBtns[1].getHiddenValue());
+        }
+
+        if (openedBtns[0]!= null && openedBtns[1]!= null ) {
+            if (openedBtns[0].getHiddenValue() == openedBtns[1].getHiddenValue()){
+                openedBtns[0].setBackground(Color.green);
+                openedBtns[1].setBackground(Color.green);
+                openedBtns[0].setEnabled(false);
+                openedBtns[1].setEnabled(false);
+            }
+
+        }
+
+        System.out.println("button pressed " + btnPressed.getHiddenValue());
     }
     private void drawLevel(){
 
@@ -51,8 +77,10 @@ public class MainWindow  extends JFrame {
         int btnCount = this.cols * this.rows;
         int[] symArr = getNumbersArray(btnCount);
         for (int i = 0; i<btnCount; i++){
-            JButton jb = new JButton("x " + getRndElem(symArr));
-            jb.addActionListener(actionEvent -> this.onButtonPress());
+
+            myBtn jb = new myBtn("x", getRndElem(symArr));
+            jb.addActionListener(actionEvent -> this.onButtonPress(jb));
+
             gamePanel.add(jb);
         }
 
