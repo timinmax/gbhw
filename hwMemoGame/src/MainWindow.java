@@ -3,11 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 
 public class MainWindow  extends JFrame {
     private int level;
     private int cols, rows;
+    private Date levelStartTime;
     private JPanel gamePanel = new JPanel();
     private myBtn[] openedBtns = new myBtn[2];
     public MainWindow() throws HeadlessException {
@@ -16,7 +18,6 @@ public class MainWindow  extends JFrame {
         drawMenu();
         add(gamePanel);
         setLevel(1);
-        setVisible(true);
     }
     private void drawMenu(){
         JMenuBar menuBar = new JMenuBar();
@@ -41,32 +42,49 @@ public class MainWindow  extends JFrame {
     }
 
     private void onButtonPress(myBtn btnPressed){
-        if (openedBtns[0]!= null && openedBtns[1]!= null ) {
-            if (openedBtns[0].getHiddenValue() != openedBtns[1].getHiddenValue()){
-                openedBtns[0].setText("x");
-                openedBtns[1].setText("x");
+        if (openedBtns[0]!= btnPressed && openedBtns[1]!= btnPressed) {
+            //no match - set placeholders back
+            if (openedBtns[0] != null && openedBtns[1] != null) {
+                if (openedBtns[0].getHiddenValue() != openedBtns[1].getHiddenValue()) {
+                    openedBtns[0].setText("x");
+                    openedBtns[1].setText("x");
+                }
+                openedBtns = new myBtn[2];
             }
-            openedBtns = new myBtn[2];
-        }
-        if (openedBtns[0]==null){
-            openedBtns[0] = btnPressed;
-            btnPressed.setText("" + openedBtns[0].getHiddenValue());
-        }else if (openedBtns[1] == null){
-            openedBtns[1] = btnPressed;
-            btnPressed.setText("" + openedBtns[1].getHiddenValue());
-        }
-
-        if (openedBtns[0]!= null && openedBtns[1]!= null ) {
-            if (openedBtns[0].getHiddenValue() == openedBtns[1].getHiddenValue()){
-                openedBtns[0].setBackground(Color.green);
-                openedBtns[1].setBackground(Color.green);
-                openedBtns[0].setEnabled(false);
-                openedBtns[1].setEnabled(false);
+            //change placeholder to hidden value
+            if (openedBtns[0] == null) {
+                openedBtns[0] = btnPressed;
+                btnPressed.setText("" + openedBtns[0].getHiddenValue());
+            } else if (openedBtns[1] == null) {
+                openedBtns[1] = btnPressed;
+                btnPressed.setText("" + openedBtns[1].getHiddenValue());
             }
+            //match
+            if (openedBtns[0] != null && openedBtns[1] != null) {
+                if (openedBtns[0].getHiddenValue() == openedBtns[1].getHiddenValue()) {
+                    openedBtns[0].setBackground(Color.green);
+                    openedBtns[1].setBackground(Color.green);
+                    openedBtns[0].setEnabled(false);
+                    openedBtns[1].setEnabled(false);
+                    checkWin();
+                }
 
+            }
         }
-
-        System.out.println("button pressed " + btnPressed.getHiddenValue());
+    }
+    private void checkWin(){
+        boolean win = true;
+        for (Component jb : gamePanel.getComponents()){
+            if(jb instanceof myBtn && ((myBtn) jb).getBackground()!= Color.green) {
+                win = false;
+                break;
+            }
+        }
+        if (win == true){
+            Date currDate = new Date();
+            JOptionPane.showMessageDialog(null, "Победа! "
+                    + ((currDate.getTime()-levelStartTime.getTime())/1000) + " секунды!");
+        }
     }
     private void drawLevel(){
 
@@ -81,17 +99,16 @@ public class MainWindow  extends JFrame {
             myBtn jb = new myBtn("x", getRndElem(symArr));
             jb.addActionListener(actionEvent -> this.onButtonPress(jb));
 
+            jb.setFont(new Font("Times", Font.BOLD,32));
+
             gamePanel.add(jb);
         }
-
-        System.out.println("Level " + this.level + " is set.");
+        setVisible(false);
+        setVisible(true);
+        levelStartTime = new Date();
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    private int[] getNumbersArray(int arrLength){
+     private int[] getNumbersArray(int arrLength){
 
         int symCount = arrLength / 2;
 
