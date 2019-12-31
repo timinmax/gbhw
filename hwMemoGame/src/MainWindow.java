@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Random;
 
 public class MainWindow  extends JFrame {
-    private int level;
     private int cols, rows;
     private Date levelStartTime;
     private JPanel gamePanel = new JPanel();
@@ -75,12 +74,12 @@ public class MainWindow  extends JFrame {
     private void checkWin(){
         boolean win = true;
         for (Component jb : gamePanel.getComponents()){
-            if(jb instanceof myBtn && ((myBtn) jb).getBackground()!= Color.green) {
+            if(jb instanceof myBtn &&  jb.getBackground()!= Color.green) {
                 win = false;
                 break;
             }
         }
-        if (win == true){
+        if (win){
             Date currDate = new Date();
             JOptionPane.showMessageDialog(null, "Победа! "
                     + ((currDate.getTime()-levelStartTime.getTime())/1000) + " секунды!");
@@ -123,7 +122,7 @@ public class MainWindow  extends JFrame {
             }
         }
         return numArray;
-    };
+    }
 
     private int getRndElem(int[] dataArray){
         int elem2Return,idx;
@@ -140,9 +139,9 @@ public class MainWindow  extends JFrame {
     private void newGame(){
         drawLevel();
     }
-    public void setLevel(int level) {
-        this.level = level;
-        switch (this.level){
+    private void setLevel(int level) {
+
+        switch (level){
             case (1):
                 this.rows = 3;
                 this.cols = 4;
