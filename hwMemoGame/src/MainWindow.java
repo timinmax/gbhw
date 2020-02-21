@@ -43,6 +43,10 @@ public class MainWindow  extends JFrame {
         int height = this.getLevel() * 300;
         setLayout(new GridLayout(width,height));
         setBounds(100,100,width,height);
+
+        
+
+
         System.out.println("Level " + this.level + " is set.");
     }
 
