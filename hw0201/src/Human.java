@@ -1,5 +1,5 @@
 import java.util.Random;
-//1232
+//12321
 public class Human implements jumpRunAble{
 
     private static final int MAX_JUMP = 3;

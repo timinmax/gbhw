@@ -1,4 +1,4 @@
-//1232
+//12321
 public enum TypeOfObstacle {
     WALL, RUN_TRACK
 }
