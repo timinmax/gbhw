@@ -1,3 +1,4 @@
+//1232
 import java.util.Random;
 
 public class Robo implements jumpRunAble{

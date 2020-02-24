@@ -1,3 +1,4 @@
+//1232
 public class Wall implements obstacle{
 
 
