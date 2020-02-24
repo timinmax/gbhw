@@ -1,4 +1,19 @@
-package PACKAGE_NAME;
+public class Wall implements obstacle{
 
-public class Wall {
+
+    private int height;
+
+    public Wall(int height) {
+        this.height = height;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public int getSize(){
+        return this.getHeight();
+    }
+    public TypeOfObstacle getType(){
+        return TypeOfObstacle.WALL;
+    }
+
 }
