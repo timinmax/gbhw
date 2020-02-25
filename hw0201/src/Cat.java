@@ -1,5 +1,5 @@
 import java.util.Random;
-
+//12321
 public class Cat implements jumpRunAble {
     private static final int MAX_JUMP = 7;
     private static final int MAX_RUN = 500;
