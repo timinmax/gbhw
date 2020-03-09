@@ -30,7 +30,7 @@ public class GBChat {
     public void addMyMessage(){
         addMessage(typedMessage.getText().trim(), "Я");
 
-        ////////DEMO\\\\\\\\\\\\
+        ////////DEMO\\\\\\\\\\\
         addMessageFromContact("Reply to: " + typedMessage.getText(), currentChatName);
         ///////////////////////
 

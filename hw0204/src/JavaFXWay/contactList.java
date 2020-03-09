@@ -17,6 +17,7 @@ public class contactList {
         this.add("Ivanov", "84534526526");
         this.add("Petrov", "2342352394231");
         this.add("Petrov", "5245235235252");
+        this.add("Dorta", "2342352394231");
     }
 
     public HashSet get(String secondName){

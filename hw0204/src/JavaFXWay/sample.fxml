@@ -15,13 +15,5 @@
       <Button fx:id="sendBtn" defaultButton="true" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="153.0" text="Send" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <ListView fx:id="contactsList" onMouseClicked="#handleContactListClicked" prefHeight="480.0" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+
 </GridPane>
