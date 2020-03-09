@@ -47,7 +47,7 @@ public class GBChat {
         }
 
         chatHistory.compute(
-                (Sender == "Я")?currentChatName:Sender.trim(),
+                (Sender.equals("Я")) ?currentChatName:Sender.trim(),
                 (chName,text)-> conversationPanel.getText() + Sender + ": " + message + System.lineSeparator()
         );
         refreshConversation();
