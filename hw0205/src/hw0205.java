@@ -7,6 +7,9 @@ public class hw0205 {
 
     public static void main(String[] args) {
         System.out.println("1 thread calc: " + oneThreadCalc() + " ms.");
+
+        DoubleThreadCalc DCC = new DoubleThreadCalc();
+        System.out.println("2 thread calc: " + DCC.splitAndCalc());
     }
 
     public static long oneThreadCalc(){
