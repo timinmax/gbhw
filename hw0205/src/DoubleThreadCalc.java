@@ -16,8 +16,18 @@ public class DoubleThreadCalc {
         System.arraycopy(arr,HALF,half2arr,0,HALF);
 
 
-        new Thread(() -> this.calcH1()).start();
-        new Thread(() -> this.calcH2()).start();
+        Thread Th1 = new Thread(() -> this.calcH1());
+        Thread Th2 = new Thread(() -> this.calcH2());
+
+        Th1.start();
+        Th2.start();
+
+        try{
+            Th1.join();
+            Th2.join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
         System.arraycopy(half1Arr,0,arr,0,HALF);
         System.arraycopy(half2arr,0,arr,HALF,HALF);
@@ -32,7 +42,7 @@ public class DoubleThreadCalc {
     }
     public void calcH2(){
         for (int i = 0; i < half2arr.length; i++) {
-            half2arr[i] = calc(half2arr[i] , i);
+            half2arr[i] = calc(half2arr[i] , i + HALF);
         }
     }
 
