@@ -1,16 +1,19 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 
 public class ChatClientServer {
+    private final String SERVER_ADDR = "localhost";
+    private final int SERVER_PORT = 8189;
+
     private Socket socket;
     private DataInputStream in;
     private DataOutputStream out;
-    private final String SERVER_ADDR = "localhost";
-    private final int SERVER_PORT = 8189;
-    boolean continueLoop = true;
 
+    boolean continueLoop = true;
+    private Thread listenAndPrintThread;
 
     public ChatClientServer() {
         if (!openClientConnection()){
@@ -23,18 +26,15 @@ public class ChatClientServer {
         }
 
 
-        Thread T1 = new Thread(()->this.listenAndPrint());
-        Thread T2 = new Thread(()->this.getInputAndSend());
-
-        T1.start();
-        T2.start();
+        listenAndPrintThread = new Thread(()->this.listenAndPrint());
+        listenAndPrintThread.start();
+        getInputAndSend();
 
         try {
-            T1.join();
-            T2.join();
-            closeConnection();
+            listenAndPrintThread.join();
         }catch (InterruptedException e){
-            e.printStackTrace();
+            System.out.println("Соединение прервано.");
+        }finally {
             closeConnection();
         }
 
@@ -48,29 +48,28 @@ public class ChatClientServer {
                 String str = this.in.readUTF();
                 if (str.equals("/end")) {
                     this.continueLoop = false;
-                    out.writeUTF(str);
                     break;
                 }
                 System.out.println(str);
             }
-        }catch (IOException e){
             closeConnection();
-            e.printStackTrace();
+            System.exit(0);
+        }catch (IOException e){
+            System.out.println("Соединение прервано.");
         }
     }
 
     private void getInputAndSend(){
         try {
+            Scanner scanner = new Scanner(System.in);
             while (this.continueLoop) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                String str = br.readLine();
+                String str = scanner.next();
                 out.writeUTF(str);
                 this.continueLoop = !str.equals("/end");
-
             }
-        }catch (IOException e){
             closeConnection();
-            e.printStackTrace();
+        }catch (IOException e){
+            System.out.println("Соединение прервано.");
         }
     }
 
@@ -96,7 +95,9 @@ public class ChatClientServer {
     }
 
     public void closeConnection() {
-        this.continueLoop = false;
+        if (listenAndPrintThread != null){
+            listenAndPrintThread.interrupt();
+        }
         try {
             in.close();
         } catch (IOException e) {
