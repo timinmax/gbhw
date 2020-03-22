@@ -55,7 +55,13 @@ public class NetworkServer {
             }
         }
     }
-
+    public void personalMessage(String recieverNickname, String messageText) throws IOException {
+        for (ClientHandler client : clients) {
+            if (client.getNickname().toLowerCase().trim().equals(recieverNickname.toLowerCase().trim())) {
+                client.sendMessage(messageText);
+            }
+        }
+    }
     public synchronized void subscribe(ClientHandler clientHandler) {
         clients.add(clientHandler);
     }
@@ -63,4 +69,6 @@ public class NetworkServer {
     public synchronized void unsubscribe(ClientHandler clientHandler) {
         clients.remove(clientHandler);
     }
+
+
 }
