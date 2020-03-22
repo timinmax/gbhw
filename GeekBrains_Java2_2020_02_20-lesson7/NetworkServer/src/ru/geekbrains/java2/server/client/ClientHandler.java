@@ -15,6 +15,10 @@ public class ClientHandler {
     private DataInputStream in;
     private DataOutputStream out;
 
+    public String getNickname() {
+        return nickname;
+    }
+
     private String nickname;
 
     public ClientHandler(NetworkServer networkServer, Socket socket) {
@@ -63,7 +67,14 @@ public class ClientHandler {
             if ("/end".equals(message)) {
                 return;
             }
-            networkServer.broadcastMessage(nickname + ": " + message, this);
+            if (message.toLowerCase().startsWith("/w")) {
+                String[] messageParts = message.split("\\s+", 3);
+                String recieverNickname = messageParts[1];
+                String messageText = nickname + ": " + messageParts[2];
+                networkServer.personalMessage(recieverNickname, messageText);
+            }else {
+                networkServer.broadcastMessage(nickname + ": " + message, this);
+            }
         }
     }
 
