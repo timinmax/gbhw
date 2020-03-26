@@ -51,7 +51,7 @@ public class ClientHandler {
         }
     }
 
-    private void closeConnection() {
+    public void closeConnection() {
         networkServer.unsubscribe(this);
         try {
             clientSocket.close();
